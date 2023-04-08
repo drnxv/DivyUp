@@ -27,7 +27,6 @@ html,
   font-size: 3rem;
 }
 
-
 input[type="file"] {
   display: none;
 }
@@ -52,10 +51,30 @@ input[type="file"] {
   border: 1px solid coral;
   background-color: whitesmoke;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  cursor: pointer
 }
 
 .bill {
   text-align: center;
+}
+
+.total_calcs {
+  display: none;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+#names_costs {
+  font-size: 6vw;
+  display: block;
+  align-self: center;
+}
+
+div.total_calcs > span {
+  font-size: 6vw;
 }
 
 .item {

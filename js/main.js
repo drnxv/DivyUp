@@ -50,12 +50,16 @@ let setPerson = id => {
   })
 }
 
+function roundTo(n, place) {
+  return +(Math.round(n + 'e+' + place) + 'e-' + place);
+}
+
 function compute(items, tax, ppl) {
   let costs = {}
   for (const i of items) {
     for (const p of i.contrib) {
       if (!(p in costs)) costs[p] = 0
-      costs[p] += (i.price * i.qty / i.contrib.length)
+      costs[p] += i.price * i.qty / i.contrib.length
     }
   }
   // split tax evenly
@@ -65,6 +69,21 @@ function compute(items, tax, ppl) {
     }
   }
   return costs
+}
+
+
+function showSplits(items, tax, ppl) {
+  let ret = ''
+  let costs = compute(items, tax, ppl)
+  let p1 = null 
+  for (var person in costs) {
+    p1 = document.createElement('span')
+    p1.innerText = ret += person + ' -> ' + '$' + costs[person].toFixed(2) + '\n'
+  }
+
+  document.querySelector('div.total_calcs').appendChild(p1)
+
+  return ret
 }
 
 window.onload = () => {
@@ -81,7 +100,13 @@ window.onload = () => {
   
   calc.onclick = () => {
     let costs = compute(items, 2.40, list.length)
-    alert(JSON.stringify(costs))
+    document.querySelector('div.bill').style.display = 'none';
+    document.querySelector('div.total_calcs').style.display = 'flex';
+    // showSplits(items, 2.40, list.length)
+    // let pplCost = showSplits(items, 2.40, list.length)
+    // document.getElementById('names_costs').innerHTML = pplCost
+    document.getElementById('names_costs').innerHTML = 'Here\'s what each person pays \n'
+    showSplits(items, 2.40, list.length)
   }
 }
 
