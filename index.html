@@ -16,8 +16,28 @@
   <meta name="msapplication-TileColor" content="#FFFFFF">
 </head>
 <body class="fullscreen">
-  <input type="file" accept="image/*;capture=camera">
-  <canvas style="display: none;" class="photo"></canvas>
+  <div class="receipt">
+    <label class="button">
+      <input type="file" accept="image/*;capture=camera">
+      Select Receipt
+    </label>
+  </div>
+  <div class="bill">
+    <div class="carousel">
+      <span id="left">←</span>
+      <h1 id="name">Your Bill</h1>
+      <span id="right">→</span>
+    </div>
+    <div class="item">
+      <span>Something × 2</span>
+      <span>$3.99</span>
+    </div>
+    <div class="item selected">
+      <span>Something × 2</span>
+      <span>$3.99</span>
+    </div>
+    <div class="pad"></div>
+  </div>
   <script src="js/main.js"></script>
 </body>
 </html>

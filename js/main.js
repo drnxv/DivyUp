@@ -1,39 +1,23 @@
-async function openCamera(video) {
-  let media = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: 'user' } } })
-  video.srcObject = media
-  await video.play()
+let items = document.querySelectorAll('div.item')
+let left = document.getElementById('left')
+let right = document.getElementById('right')
+let person = document.getElementById('name')
+list = ['Pranav C', 'Pranav P', 'Panda', 'Varun']
+id = 0
+
+items.forEach(item => {
+  item.onclick = () => item.classList.toggle('selected')
+})
+
+function rot(i) {
+  id = id + i == -1 ? 3 : (id + i) % 4
+  return id
 }
 
-async function closeCamera(video) {
-  console.log('aefwa')
-  await video.pause()
-  video.parentElement.style.display = 'none'
-}
+let setPerson = id => person.innerText = list[id]
 
-async function snapPhoto(video, canvas) {
-  let ctx = canvas.getContext('2d')
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
-  ctx.save()
-  ctx.drawImage(video, 0, 0)
-  ctx.restore()
-  let img = document.createElement('img')
-  img.currentSrc = canvas.toDataURL('image/png')
-  document.body.appendChild(img)
-}
+setPerson(id)
 
-window.onload = () => {
-  'use strict';
+left.onclick = () => setPerson(rot(-1))
+right.onclick = () => setPerson(rot(1))
 
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker
-             .register('./sw.js');
-  }
-  let video = document.querySelector('video.camera')
-  try {
-    openCamera(video)
-  } catch (error) {
-    alert(error)
-  }
-
-}
