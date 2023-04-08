@@ -10,6 +10,11 @@ html,
   margin: 0;
   padding: 0;
   width: 100%;
+  background-color: coral;
+  flex-direction: column;
+  align-items: center;
+  font-family: Geneva, Tahoma, sans-serif;
+  color: whitesmoke;
 }
 
 /* Center the content in the browser window */
@@ -23,28 +28,63 @@ html,
 }
 
 
-.camera {
-  position: absolute;
-  z-index: -1;
-  top: 0%;
-  left: 0%;
-  width: 100%;
-  height: 100%;
+input[type="file"] {
+  display: none;
 }
 
-.camera-button {
-  position: relative;
-  z-index: 1;
-  background-color: hotpink;
-  width: 2em;
-  height: 2em;
-  top:90%;
+.receipt {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+  display: none;
 }
 
-.snap {
-  left:45%;
+.button {
+  border: 1px solid whitesmoke;
+  padding: 6px 12px;
+  cursor: pointer;
 }
 
-.close {
-  left:55%;
+.bill {
+  text-align: center;
+}
+
+.item {
+  display: flex;
+  padding: 6px 12px;
+  border: 1px solid whitesmoke;
+  justify-content: space-between;
+  width: 75vw;
+  margin-top: 3vh;
+  transition-duration: 0.4s;
+}
+
+.selected {
+  color: coral;
+  border: 1px solid coral;
+  background-color: whitesmoke;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.pad {
+  height: 10vh;
+}
+
+.carousel {
+  margin: 1vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.carousel > h1 {
+  display: inline;
+  margin: 3vh 3vw;
+}
+
+.carousel > span {
+  font-weight: 900;
+  font-size: xx-large;
+  user-select: none; 
 }
