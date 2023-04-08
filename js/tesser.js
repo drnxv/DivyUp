@@ -16,12 +16,11 @@ Image.load(img).then(function (image) {
 
 var gimg = '/Users/pranav/Documents/Bitcamp 2023/images/grey receipt.jpg'
 
-tesseract.recognize(gimg, config)
-  .then((text) => {
+tesseract.recognize(gimg, config).then((text) => {
     let receipt = text.split('\n')
     receipt = receipt.filter(item => item != '')
     console.log(receipt)
-  })
-  .catch((error) => {
+  }).catch((error) => {
     console.log(error.message)
   })
+
