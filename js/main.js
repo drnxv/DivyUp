@@ -2,6 +2,7 @@ let left = document.getElementById('left')
 let right = document.getElementById('right')
 let person = document.getElementById('name')
 let calc = document.getElementById('calc')
+let input = document.querySelector('input[type="file"]')
 
 function Item(name, qty, price) {
   let item = document.createElement('div')
@@ -17,7 +18,6 @@ function Item(name, qty, price) {
 
   item.appendChild(t1)
   item.appendChild(t2)
-  
 
   return {item:item, contrib:[], price:price, qty:qty}
 }
@@ -87,6 +87,17 @@ function showSplits(items, tax, ppl) {
 }
 
 window.onload = () => {
+  
+  input.onchange = () => {
+    var data = new FormData()
+    data.append('receipt', input.files[0])
+
+    fetch('https://e393-65-113-61-98.ngrok-free.app/ocr', {
+      method: 'POST',
+      body: data
+    })
+  }
+
   items.forEach(i => {
     i.item.onclick = () => toggleItem(i)
   })
