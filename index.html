@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Hello World</title>
+  <title>TrueSplit</title>
   <link rel="manifest" href="/manifest.json">
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -17,6 +17,7 @@
 </head>
 <body class="fullscreen">
   <div class="receipt">
+    <h1></h1>
     <label class="button">
       <input type="file" accept="image/*;capture=camera">
       Select Receipt
@@ -31,7 +32,8 @@
     <div id="items">
 
     </div>
-    <label class="calc">Compute</label>
+    <div class="pad"></div>
+    <label id="calc" class="button">Compute</label>
     <div class="pad"></div>
   </div>
   <script src="js/main.js"></script>

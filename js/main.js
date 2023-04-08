@@ -1,6 +1,7 @@
 let left = document.getElementById('left')
 let right = document.getElementById('right')
 let person = document.getElementById('name')
+let calc = document.getElementById('calc')
 
 function Item(name, qty, price) {
   let item = document.createElement('div')
@@ -18,7 +19,7 @@ function Item(name, qty, price) {
   item.appendChild(t2)
   
 
-  return {item:item, contrib:[]}
+  return {item:item, contrib:[], price:price, qty:qty}
 }
 
 list = ['Pranav C', 'Pranav P', 'Panda', 'Varun']
@@ -49,6 +50,23 @@ let setPerson = id => {
   })
 }
 
+function compute(items, tax, ppl) {
+  let costs = {}
+  for (const i of items) {
+    for (const p of i.contrib) {
+      if (!(p in costs)) costs[p] = 0
+      costs[p] += (i.price * i.qty / i.contrib.length)
+    }
+  }
+  // split tax evenly
+  for (const p in costs) {
+    if (Object.hasOwnProperty.call(costs, p)) {
+      costs[p] += (tax / ppl)
+    }
+  }
+  return costs
+}
+
 window.onload = () => {
   items.forEach(i => {
     i.item.onclick = () => toggleItem(i)
@@ -61,5 +79,9 @@ window.onload = () => {
   let bill = document.getElementById('items')
   for (const i of items) bill.appendChild(i.item)
   
+  calc.onclick = () => {
+    let costs = compute(items, 2.40, list.length)
+    alert(JSON.stringify(costs))
+  }
 }
 
