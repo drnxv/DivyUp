@@ -69,14 +69,15 @@ function compute(items, tax, ppl) {
 
 window.onload = () => {
   
-  input.onchange = () => {
+  input.onchange = async () => {
     var data = new FormData()
     data.append('receipt', input.files[0])
 
-    fetch('https://e393-65-113-61-98.ngrok-free.app/ocr', {
+    let r = await fetch('/ocr', {
       method: 'POST',
       body: data
     })
+    alert(r)
   }
 
   items.forEach(i => {
