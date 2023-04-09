@@ -27,13 +27,12 @@ html,
   font-size: 3rem;
 }
 
-
 input[type="file"] {
   display: none;
 }
 
 .receipt {
-  display: flex;
+  display: none;
   flex-grow: 1;
   flex-direction: column;
   justify-content: center;
@@ -51,11 +50,37 @@ input[type="file"] {
   border: 1px solid coral;
   background-color: whitesmoke;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  cursor: pointer
 }
 
 .bill {
   text-align: center;
+  display: block;
+}
+
+.total_calcs {
   display: none;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+#names_costs {
+  font-size: 7vw;
+  display: block;
+  align-self: center;
+}
+
+div.total_calcs > table {
+  font-size: 7vw;
+  display: block;
+  align-self: center;
+}
+
+div.total_calcs > span {
+  font-size: 6vw;
 }
 
 .item {

@@ -1,10 +1,11 @@
 from flask import Flask, request
+from flask_cors import CORS
 import io
 import numpy as np
 import cv2
 
-
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/ocr', methods=['POST'])
 def result():
