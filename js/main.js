@@ -55,7 +55,7 @@ function compute(items, tax, ppl) {
   for (const i of items) {
     for (const p of i.contrib) {
       if (!(p in costs)) costs[p] = 0
-      costs[p] += (i.price * i.qty / i.contrib.length)
+      costs[p] += i.price * i.qty / i.contrib.length
     }
   }
   // split tax evenly
@@ -65,6 +65,32 @@ function compute(items, tax, ppl) {
     }
   }
   return costs
+}
+
+function showSplits(items, tax, ppl) {
+  let ret = ''
+  let costs = compute(items, tax, ppl)
+  let table = document.createElement('table')
+  let headerRow = table.insertRow()
+  let header1 = headerRow.insertCell(0)
+  header1.innerText = 'Name'
+  header1.style.fontWeight = 'bold'
+  let header2 = headerRow.insertCell(1)
+  header2.innerText = 'Amount'
+  header2.style.fontWeight = 'bold'
+
+  for (var person in costs) {
+    let row = table.insertRow()
+    let cell1 = row.insertCell(0)
+    cell1.innerText = person
+    let cell2 = row.insertCell(1)
+    cell2.innerText = '$' + costs[person].toFixed(2)
+    cell2.style.textAlign = 'center'
+  }
+
+  document.querySelector('div.total_calcs').appendChild(table)
+
+  return ret
 }
 
 window.onload = () => {
@@ -93,7 +119,9 @@ window.onload = () => {
   
   calc.onclick = () => {
     let costs = compute(items, 2.40, list.length)
-    alert(JSON.stringify(costs))
+    document.querySelector('div.bill').style.display = 'none';
+    document.querySelector('div.total_calcs').style.display = 'flex';
+    document.getElementById('names_costs').innerHTML = 'Here\'s what each person pays \n'
+    showSplits(items, 2.40, list.length)
   }
 }
-

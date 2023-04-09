@@ -5,6 +5,7 @@ import cv2
 
 app = Flask(__name__)
 
+
 @app.route('/<path:name>')
 def home(name):
    return send_from_directory('../', name)
