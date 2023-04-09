@@ -5,8 +5,7 @@
   <title>TrueSplit</title>
   <link rel="manifest" href="/manifest.json">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
-  <link rel="apple-touch-icon" href="images/hello-icon-152.png">
+  <link rel="apple-touch-icon" href="images/Screenshot 2023-04-08 at 10.15.35 PM.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="white"/>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -16,26 +15,31 @@
   <meta name="msapplication-TileColor" content="#FFFFFF">
 </head>
 <body class="fullscreen">
+  <div class="friends off">
+    <div class="pad"></div>
+    <input type="text" placeholder="Enter Names">
+    <div id="names"></div>
+    <label id="setFriends" class="button">Continue</label>
+  </div>
   <div class="receipt">
-    <h1></h1>
+    <h1>DivyUp</h1>
     <label id="select" class="button">
       <input type="file" accept="image/*;capture=camera">
       Select Receipt
     </label>
   </div>
-  <div class="bill">
+  <div class="bill off">
     <div class="carousel">
       <span id="left">←</span>
       <h1 id="name"></h1>
       <span id="right">→</span>
     </div>
-    <div id="items">
-    </div>
+    <div id="items"></div>
     <div class="pad"></div>
     <label id="calc" class="button">Compute</label>
     <div class="pad"></div>
   </div>
-  <div class="total_calcs">
+  <div class="total_calcs off">
     <h1 id="names_costs"></h1>
   </div>
   <script src="js/main.js"></script>
