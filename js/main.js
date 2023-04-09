@@ -4,6 +4,10 @@ let person = document.getElementById('name')
 let calc = document.getElementById('calc')
 let input = document.querySelector('input[type="file"]')
 
+let receipt = document.querySelector('div.receipt')
+let bill = document.querySelector('div.bill')
+let total_calcs = document.querySelector('div.total_calcs')
+
 function Item(name, qty, price) {
   let item = document.createElement('div')
   let t1 = document.createElement('span')
@@ -23,8 +27,9 @@ function Item(name, qty, price) {
 }
 
 list = ['Pranav C', 'Pranav P', 'Panda', 'Varun']
-items = [Item('item a', 1, 3.99), Item('item b', 2, 4.99)]
+items = []
 id = 0
+tax = 0
 
 function rot(i) {
   id = id + i == -1 ? 3 : (id + i) % 4
@@ -88,7 +93,7 @@ function showSplits(items, tax, ppl) {
     cell2.style.textAlign = 'center'
   }
 
-  document.querySelector('div.total_calcs').appendChild(table)
+  total_calcs.appendChild(table)
 
   return ret
 }
@@ -103,24 +108,36 @@ window.onload = () => {
       method: 'POST',
       body: data
     })
-    alert(r)
-  }
+    let json = await r.json()
+    // add data
+    tax = json.tax
+    for (let i = 0; i < json.items.length; i++)
+      items.push(Item(json.items[i], json.qty[i], json.prices[i]))
+    
+    items.forEach(i => {
+      i.item.onclick = () => toggleItem(i)
+    })
 
-  items.forEach(i => {
-    i.item.onclick = () => toggleItem(i)
-  })
+    let b = document.getElementById('items')
+    for (const i of items) b.appendChild(i.item)
+
+    // transition
+    receipt.classList.toggle('fade')
+    setTimeout(() => {
+      receipt.style.display = 'none'
+      bill.style.display = 'block'
+    }, 1000);
+    bill.classList.toggle('fade')
+  }
 
   setPerson(id)
   left.onclick = () => setPerson(rot(-1))
   right.onclick = () => setPerson(rot(1))
-
-  let bill = document.getElementById('items')
-  for (const i of items) bill.appendChild(i.item)
   
   calc.onclick = () => {
     let costs = compute(items, 2.40, list.length)
-    document.querySelector('div.bill').style.display = 'none';
-    document.querySelector('div.total_calcs').style.display = 'flex';
+    bill.style.display = 'none';
+    total_calcs.style.display = 'flex';
     document.getElementById('names_costs').innerHTML = 'Here\'s what each person pays \n'
     showSplits(items, 2.40, list.length)
   }
