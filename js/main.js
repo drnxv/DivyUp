@@ -3,10 +3,14 @@ let right = document.getElementById('right')
 let person = document.getElementById('name')
 let calc = document.getElementById('calc')
 let input = document.querySelector('input[type="file"]')
+let iname = document.querySelector('input[type="text"]')
+let names = document.getElementById('names')
+let setF = document.getElementById('setFriends')
 
 let receipt = document.querySelector('div.receipt')
 let bill = document.querySelector('div.bill')
 let total_calcs = document.querySelector('div.total_calcs')
+let friends = document.querySelector('div.friends')
 
 function Item(name, qty, price) {
   let item = document.createElement('div')
@@ -26,13 +30,13 @@ function Item(name, qty, price) {
   return {item:item, contrib:[], price:price, qty:qty}
 }
 
-list = ['Pranav C', 'Pranav P', 'Panda', 'Varun']
+list = []
 items = []
 id = 0
 tax = 0
 
 function rot(i) {
-  id = id + i == -1 ? 3 : (id + i) % 4
+  id = id + i == -1 ? (list.length - 1) : (id + i) % list.length
   return id
 }
 
@@ -122,23 +126,37 @@ window.onload = () => {
     for (const i of items) b.appendChild(i.item)
 
     // transition
-    receipt.classList.toggle('fade')
-    setTimeout(() => {
-      receipt.style.display = 'none'
-      bill.style.display = 'block'
-    }, 1000);
-    bill.classList.toggle('fade')
+    receipt.classList.toggle('off')
+    friends.classList.toggle('off')
   }
 
-  setPerson(id)
+  iname.onkeyup = ({key}) => {
+    if (key === "Enter" && iname.value.length > 0) {
+      let sp = document.createElement('span')
+      sp.innerText = iname.value
+      sp.onclick = () => sp.remove()
+      names.appendChild(sp)
+      iname.value = ''
+    }
+  }
+
+  setF.onclick = () => {
+    document.querySelectorAll('div#names > span').forEach(s => list.push(s.innerText))
+    setPerson(id)
+    // transition
+    friends.classList.toggle('off')
+    bill.classList.toggle('off')
+  }
+
   left.onclick = () => setPerson(rot(-1))
   right.onclick = () => setPerson(rot(1))
   
   calc.onclick = () => {
-    let costs = compute(items, 2.40, list.length)
-    bill.style.display = 'none';
-    total_calcs.style.display = 'flex';
+
+    bill.classList.toggle('off')
+    total_calcs.classList.toggle('off')
+
     document.getElementById('names_costs').innerHTML = 'Here\'s what each person pays \n'
-    showSplits(items, 2.40, list.length)
+    showSplits(items, tax, list.length)
   }
 }

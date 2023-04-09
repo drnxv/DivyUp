@@ -30,6 +30,12 @@ html,
 input[type="file"] {
   display: none;
 }
+input[type="text"] {
+  padding:10px;
+  border:0;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  outline: none;
+}
 
 .receipt {
   display: flex;
@@ -37,12 +43,37 @@ input[type="file"] {
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  opacity: 1;
-  transition: opacity 1s; 
 }
 
-.fade {
-  opacity: 0;
+.friends {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  text-align: center;
+}
+
+#names {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  text-align: center;
+}
+
+.friends > .button {
+  margin-top: 2vh;
+}
+
+#names > span {
+  padding-top: 2vh;
+  user-select: none;
+}
+
+#names > span:hover {
+  text-decoration: line-through;
+}
+
+.off {
+  display: none;
 }
 
 .receipt > h1 {
@@ -66,13 +97,10 @@ input[type="file"] {
 
 .bill {
   text-align: center;
-  display: none;
-  opacity: 1;
-  transition: opacity 1s; 
 }
 
 .total_calcs {
-  display: none;
+  display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   align-content: center;
@@ -84,8 +112,7 @@ input[type="file"] {
 
 #names_costs {
   font-size: 7vw;
-  display: block;
-  align-self: center;
+  text-align: center;
 }
 
 div.total_calcs > table {
